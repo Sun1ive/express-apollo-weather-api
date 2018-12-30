@@ -13,7 +13,8 @@ module.exports = `
 
   type Query {
     city(name: String!): CityWeather!
-
     cities: [CityWeather]!
+    hottestCity: CityWeather
+    coldestCity: CityWeather
   }  
 `

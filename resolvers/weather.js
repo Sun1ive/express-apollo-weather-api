@@ -18,6 +18,26 @@ module.exports = {
       } = await client.getCities();
 
       return data;
+    },
+
+    hottestCity: async () => {
+      const {
+        data: { data }
+      } = await client.getCities();
+
+      return data.find(
+        ({ temp }) => temp === Math.max(...data.map(({ temp }) => temp))
+      );
+    },
+
+    coldestCity: async () => {
+      const {
+        data: { data }
+      } = await client.getCities();
+
+      return data.find(
+        ({ temp }) => temp === Math.min(...data.map(({ temp }) => temp))
+      );
     }
   }
 };

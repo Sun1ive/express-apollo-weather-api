@@ -15,6 +15,7 @@ module.exports = {
   rules: {
     'linebreak-style': 0,
     'global-require': 0,
+    'no-shadow': 0,
     'arrow-parens': 0,
     'class-methods-use-this': 0,
     'comma-dangle': 0,
