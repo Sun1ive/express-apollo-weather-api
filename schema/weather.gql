@@ -1,0 +1,19 @@
+module.exports = `
+  type CityWeather {
+    name: String!
+    temp: Int!
+    pressure: Int!
+    wind: WindProperty
+  }
+  
+  type WindProperty {
+    speed: Int!
+    direction: Int!
+  }
+
+  type Query {
+    city(name: String!): CityWeather!
+
+    cities: [CityWeather]!
+  }  
+`
