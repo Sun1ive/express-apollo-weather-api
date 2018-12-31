@@ -10,15 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.11.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-node": "^4.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.0",
-    "nodemon": "^1.18.9"
-  },
   "dependencies": {
     "apollo-server-express": "^2.3.1",
     "axios": "^0.18.0",
@@ -28,6 +19,18 @@
     "graphql": "^14.0.2",
     "helmet": "^3.15.0",
     "merge-graphql-schemas": "^1.5.8",
-    "morgan": "^1.9.1"
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.1",
+    "morgan": "^1.9.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-node": "^4.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "nodemon": "^1.18.9"
   }
 }
