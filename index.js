@@ -5,8 +5,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const { ApolloServer, makeExecutableSchema } = require('apollo-server-express');
+const mongoose = require('mongoose');
 
-const { PORT } = require('./config');
+const { PORT, DB_USER, DB_PASSWORD } = require('./config');
 const { typeDefs } = require('./schema');
 const { resolvers } = require('./resolvers');
 
@@ -33,8 +34,22 @@ app
 
 server.applyMiddleware({ app });
 
-app.listen({ port: PORT }, () => {
-  console.log(
-    `🚀  Server ready at http://localhost:${PORT}${server.graphqlPath}`
-  );
-});
+mongoose
+  .connect(
+    `mongodb://${DB_USER}:${DB_PASSWORD}@ds259361.mlab.com:59361/apollo-demo-db`,
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      autoIndex: true
+    }
+  )
+  .then(() => {
+    app.listen({ port: PORT }, () => {
+      console.log(
+        `🚀  Server ready at http://localhost:${PORT}${server.graphqlPath}`
+      );
+    });
+  })
+  .catch(err => {
+    console.error('Error during connect to DB ', err);
+  });

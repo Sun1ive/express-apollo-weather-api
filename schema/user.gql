@@ -1,0 +1,12 @@
+module.exports = `
+  type User {
+    _id: String
+    email: String
+    password: String
+  }
+
+  type Query {
+    getUsers: [User!]!
+    getUserById(id: ID!): User!
+  }  
+`
