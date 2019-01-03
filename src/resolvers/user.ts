@@ -1,6 +1,6 @@
-const User = require('../models/user');
+import User from '../models/user';
 
-module.exports = {
+export default {
   Query: {
     getUsers: async () => {
       const users = await User.find({});
@@ -8,7 +8,7 @@ module.exports = {
       return users;
     },
 
-    getUserById: async (_, { id }) => {
+    getUserById: async (_: any, { id }: { id: string }) => {
       const user = await User.findById(id);
       return user;
     }

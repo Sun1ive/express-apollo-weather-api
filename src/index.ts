@@ -1,21 +1,22 @@
 require('dotenv-safe').config();
 
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const { ApolloServer, makeExecutableSchema } = require('apollo-server-express');
-const mongoose = require('mongoose');
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
+import mongoose from 'mongoose';
 
-const { PORT, DB_USER, DB_PASSWORD } = require('./config');
-const { typeDefs } = require('./schema');
-const { resolvers } = require('./resolvers');
+import { PORT, DB_USER, DB_PASSWORD } from './config';
+import { typeDefs } from './schema';
+import { resolvers } from './resolvers';
 
 const app = express();
 
 const server = new ApolloServer({
   schema: makeExecutableSchema({
     typeDefs,
+    // @ts-ignore
     resolvers
   })
 });

@@ -1,6 +1,8 @@
-const axios = require('axios');
+import axios, { AxiosInstance } from 'axios';
 
-class API {
+export default class API {
+  public client: AxiosInstance;
+
   constructor() {
     this.client = axios.create();
   }
@@ -9,5 +11,3 @@ class API {
     return this.client.get('http://localhost:3001/db');
   }
 }
-
-module.exports = API;

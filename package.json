@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon index"
+    "start": "node dist/index.js",
+    "postinstall": "npm run build",
+    "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/index.ts",
+    "build": "rimraf dist && tsc",
+    "gen": "gql-gen"
   },
   "keywords": [],
   "author": "",
@@ -22,15 +25,24 @@
     "mongodb": "^3.1.10",
     "mongoose": "^5.4.1",
     "morgan": "^1.9.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "typescript": "^3.2.2"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/graphql": "^14.0.4",
+    "@types/helmet": "^0.0.42",
+    "@types/mongoose": "^5.3.7",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^10.12.18",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.11.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-node": "^4.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
-    "nodemon": "^1.18.9"
+    "graphql-code-generator": "^0.15.2",
+    "nodemon": "^1.18.9",
+    "ts-node": "^7.0.1"
   }
 }
