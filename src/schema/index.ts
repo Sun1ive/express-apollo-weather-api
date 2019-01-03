@@ -1,7 +1,6 @@
-/// <reference path="../graphql.d.ts" />
+import { fileLoader, mergeTypes } from 'merge-graphql-schemas';
+import path from 'path';
 
-import { mergeTypes } from 'merge-graphql-schemas';
+const typesArray = fileLoader(path.join(__dirname, './*.schema.*'));
 
-const types = [require('./user.gql'), require('./weather.gql')];
-
-export const typeDefs = mergeTypes(types, { all: true });
+export const typeDefs = mergeTypes(typesArray);

@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -7,22 +15,22 @@ const api_1 = __importDefault(require("../api"));
 const client = new api_1.default();
 exports.default = {
     Query: {
-        city: async (_, { name }) => {
-            const { data: { data } } = await client.getCities();
+        city: (_, { name }) => __awaiter(this, void 0, void 0, function* () {
+            const { data: { data } } = yield client.getCities();
             return data.find(({ name: cityName }) => cityName === name);
-        },
-        cities: async () => {
-            const { data: { data } } = await client.getCities();
+        }),
+        cities: () => __awaiter(this, void 0, void 0, function* () {
+            const { data: { data } } = yield client.getCities();
             return data;
-        },
-        hottestCity: async () => {
-            const { data: { data } } = await client.getCities();
+        }),
+        hottestCity: () => __awaiter(this, void 0, void 0, function* () {
+            const { data: { data } } = yield client.getCities();
             return data.find(({ temp }) => temp === Math.max(...data.map(({ temp }) => temp)));
-        },
-        coldestCity: async () => {
-            const { data: { data } } = await client.getCities();
+        }),
+        coldestCity: () => __awaiter(this, void 0, void 0, function* () {
+            const { data: { data } } = yield client.getCities();
             return data.find(({ temp }) => temp === Math.min(...data.map(({ temp }) => temp)));
-        }
+        })
     }
 };
 //# sourceMappingURL=weather.js.map

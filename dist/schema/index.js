@@ -1,7 +1,10 @@
 "use strict";
-/// <reference path="../graphql.d.ts" />
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const merge_graphql_schemas_1 = require("merge-graphql-schemas");
-const types = [require('./user.gql'), require('./weather.gql')];
-exports.typeDefs = merge_graphql_schemas_1.mergeTypes(types, { all: true });
+const path_1 = __importDefault(require("path"));
+const typesArray = merge_graphql_schemas_1.fileLoader(path_1.default.join(__dirname, './*.schema.*'));
+exports.typeDefs = merge_graphql_schemas_1.mergeTypes(typesArray);
 //# sourceMappingURL=index.js.map

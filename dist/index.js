@@ -16,10 +16,12 @@ const resolvers_1 = require("./resolvers");
 const app = express_1.default();
 const server = new apollo_server_express_1.ApolloServer({
     schema: apollo_server_express_1.makeExecutableSchema({
-        typeDefs: schema_1.typeDefs,
         // @ts-ignore
-        resolvers: resolvers_1.resolvers
-    })
+        resolvers: resolvers_1.resolvers,
+        typeDefs: schema_1.typeDefs
+    }),
+    cacheControl: true,
+    tracing: true
 });
 app
     .use(cors_1.default())

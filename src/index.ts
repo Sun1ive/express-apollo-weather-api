@@ -15,10 +15,18 @@ const app = express();
 
 const server = new ApolloServer({
   schema: makeExecutableSchema({
-    typeDefs,
     // @ts-ignore
-    resolvers
-  })
+    resolvers,
+    typeDefs
+  }),
+  formatError(error: Error) {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      // logging the errors can help in development
+      console.log(error);
+    }
+    return error;
+  },
+  tracing: true
 });
 
 app
