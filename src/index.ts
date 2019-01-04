@@ -4,18 +4,20 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import { join } from 'path';
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
 import mongoose from 'mongoose';
 
 import { PORT, DB_USER, DB_PASSWORD } from './config';
-import { typeDefs } from './schema';
+import { mergeTypes, fileLoader } from 'merge-graphql-schemas';
 import { resolvers } from './resolvers';
+
+const typeDefs = mergeTypes(fileLoader(join(__dirname, './schema')));
 
 const app = express();
 
 const server = new ApolloServer({
   schema: makeExecutableSchema({
-    // @ts-ignore
     resolvers,
     typeDefs
   }),

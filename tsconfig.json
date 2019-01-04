@@ -1,21 +1,22 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
+    "target": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "noImplicitAny": true,
-    "declaration": true,
+    "declaration": false,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "esModuleInterop": true,
     "alwaysStrict": true,
+    "skipDefaultLibCheck": true,
     "outDir": "./dist",
     "sourceMap": true,
     "types": ["node"],
     "lib": ["esnext", "dom"]
   },
   "include": ["./src/**/*"],
-  "exclude": ["./node_modules/**"]
+  "exclude": ["./node_modules/**", "./src/**.d.ts"]
 }
