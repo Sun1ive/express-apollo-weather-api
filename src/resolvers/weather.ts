@@ -1,15 +1,23 @@
-const API = require('../api');
+import API from '../api';
 
 const client = new API();
 
-module.exports = {
+type cityQuery = {
+  name: string;
+};
+
+type temperature = {
+  temp: number;
+};
+
+export default {
   Query: {
-    city: async (_, { name }) => {
+    city: async (_: any, { name }: cityQuery) => {
       const {
         data: { data }
       } = await client.getCities();
 
-      return data.find(({ name: cityName }) => cityName === name);
+      return data.find(({ name: cityName }: cityQuery) => cityName === name);
     },
 
     cities: async () => {
@@ -26,7 +34,8 @@ module.exports = {
       } = await client.getCities();
 
       return data.find(
-        ({ temp }) => temp === Math.max(...data.map(({ temp }) => temp))
+        ({ temp }: temperature) =>
+          temp === Math.max(...data.map(({ temp }: temperature) => temp))
       );
     },
 
@@ -36,7 +45,8 @@ module.exports = {
       } = await client.getCities();
 
       return data.find(
-        ({ temp }) => temp === Math.min(...data.map(({ temp }) => temp))
+        ({ temp }: temperature) =>
+          temp === Math.min(...data.map(({ temp }: temperature) => temp))
       );
     }
   }

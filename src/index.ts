@@ -1,23 +1,33 @@
 require('dotenv-safe').config();
 
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const { ApolloServer, makeExecutableSchema } = require('apollo-server-express');
-const mongoose = require('mongoose');
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import { join } from 'path';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
+import mongoose from 'mongoose';
 
-const { PORT, DB_USER, DB_PASSWORD } = require('./config');
-const { typeDefs } = require('./schema');
-const { resolvers } = require('./resolvers');
+import { PORT, DB_USER, DB_PASSWORD } from './config';
+import { mergeTypes, fileLoader } from 'merge-graphql-schemas';
+import { resolvers } from './resolvers';
+
+const typeDefs = mergeTypes(fileLoader(join(__dirname, './schema')));
 
 const app = express();
 
 const server = new ApolloServer({
   schema: makeExecutableSchema({
-    typeDefs,
-    resolvers
-  })
+    resolvers,
+    typeDefs
+  }),
+  formatError(error: Error) {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      console.log(error);
+    }
+    return error;
+  },
+  tracing: true
 });
 
 app
