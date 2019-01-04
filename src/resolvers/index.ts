@@ -1,9 +1,6 @@
-import weather from './weather';
-import user from './user';
+import { fileLoader, mergeResolvers } from 'merge-graphql-schemas';
+import path from 'path';
 
-export const resolvers = {
-  Query: {
-    ...weather.Query,
-    ...user.Query
-  }
-};
+const typesArray = fileLoader(path.join(__dirname));
+
+export const resolvers = mergeResolvers(typesArray);
