@@ -14,6 +14,27 @@ exports.default = {
             const user = await user_1.default.findById(id);
             return user;
         }
+    },
+    Mutation: {
+        register: async () => {
+            return {
+                error: null,
+                user: {
+                    _id: '1',
+                    email: 'hello@world'
+                }
+            };
+        },
+        login: async () => {
+            return {
+                error: null,
+                user: {
+                    _id: 1,
+                    email: 'foo@bar'
+                },
+                token: '1112312312'
+            };
+        }
     }
 };
 //# sourceMappingURL=user.js.map
