@@ -20,17 +20,26 @@ export default {
   Mutation: {
     register: async (
       root: any,
-      { email, username, password }: T.UserInput,
+      { UserInput: { email, username, password } }: T.RegisterMutationArgs,
       { req, res }: Context<CustomContext>
     ): Promise<T.RegisterResponse> => {
+      const user = await User.findOne({
+        email
+      });
+
+      if (user) {
+        throw new Error('User already exist');
+      }
+
+      const newUser = await User.create({
+        email,
+        password,
+        username
+      });
 
       return {
-        error: null,
-        user: {
-          _id: '1',
-          username: 'hello',
-          email: 'world'
-        }
+        // @ts-ignore
+        user: newUser.toGraph()
       };
     },
 
