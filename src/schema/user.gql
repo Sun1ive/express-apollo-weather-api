@@ -1,6 +1,6 @@
 type Mutation {
-  register(UserInput: UserInput): RegisterResponse!
-  login(UserInput: UserInput): LoginResponse!
+  register(UserInput: UserInput!): RegisterResponse!
+  login(UserInput: UserInput!): LoginResponse!
 }
 
 type Query {

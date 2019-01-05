@@ -5,7 +5,7 @@ export interface UserInput {
 
   password: string;
 
-  username?: Maybe<string>;
+  username: string;
 }
 
 // ====================================================
@@ -21,9 +21,9 @@ export interface Query {
 
   cities: (Maybe<CityWeather>)[];
 
-  hottestCity?: Maybe<CityWeather>;
+  hottestCity: CityWeather;
 
-  coldestCity?: Maybe<CityWeather>;
+  coldestCity: CityWeather;
 }
 
 export interface User {
@@ -33,7 +33,7 @@ export interface User {
 
   password?: Maybe<string>;
 
-  username?: Maybe<string>;
+  username: string;
 }
 
 export interface CityWeather {
@@ -87,8 +87,8 @@ export interface CityQueryArgs {
   name: string;
 }
 export interface RegisterMutationArgs {
-  UserInput?: Maybe<UserInput>;
+  UserInput: UserInput;
 }
 export interface LoginMutationArgs {
-  UserInput?: Maybe<UserInput>;
+  UserInput: UserInput;
 }
