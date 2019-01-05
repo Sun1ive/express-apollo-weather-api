@@ -1,5 +1,7 @@
 import User from '../models/user';
 import * as T from '../types';
+import { CustomContext } from '../types/context';
+import { Context } from 'apollo-server-core';
 
 export default {
   Query: {
@@ -18,8 +20,10 @@ export default {
   Mutation: {
     register: async (
       root: any,
-      { email, username, password }: T.UserInput
+      { email, username, password }: T.UserInput,
+      { req, res }: Context<CustomContext>
     ): Promise<T.RegisterResponse> => {
+
       return {
         error: null,
         user: {

@@ -11,6 +11,8 @@ import mongoose from 'mongoose';
 import { PORT, DB_USER, DB_PASSWORD } from './config';
 import { mergeTypes, fileLoader } from 'merge-graphql-schemas';
 import { resolvers } from './resolvers';
+import { Context } from 'apollo-server-core';
+import { CustomContext } from './types/context';
 
 const typeDefs = mergeTypes(fileLoader(join(__dirname, './schema')));
 
@@ -27,7 +29,7 @@ const server = new ApolloServer({
     }
     return error;
   },
-  tracing: true
+  context: ({ req, res }: Context<CustomContext>) => ({ req, res })
 });
 
 app
