@@ -1,4 +1,5 @@
 import User from '../models/user';
+import * as T from '../types';
 
 export default {
   Query: {
@@ -15,12 +16,16 @@ export default {
   },
 
   Mutation: {
-    register: async () => {
+    register: async (
+      root: any,
+      { email, username, password }: T.UserInput
+    ): Promise<T.RegisterResponse> => {
       return {
         error: null,
         user: {
           _id: '1',
-          email: 'hello@world'
+          username: 'hello',
+          email: 'world'
         }
       };
     },
