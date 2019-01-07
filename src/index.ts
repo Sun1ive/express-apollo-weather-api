@@ -13,6 +13,8 @@ import { mergeTypes, fileLoader } from 'merge-graphql-schemas';
 import { resolvers } from './resolvers';
 import { Context } from 'apollo-server-core';
 import { CustomContext } from './types/context';
+import { GraphQLError } from 'graphql';
+import nanoid from 'nanoid';
 
 const typeDefs = mergeTypes(fileLoader(join(__dirname, './schema')));
 
@@ -23,11 +25,13 @@ const server = new ApolloServer({
     resolvers,
     typeDefs
   }),
-  formatError(error: Error) {
+  formatError(error: GraphQLError) {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      console.log(error);
+      return error;
     }
-    return error;
+
+    const errorId = nanoid();
+    return new GraphQLError(`Internal server error ${errorId}`);
   },
   context: ({ req, res }: Context<CustomContext>) => ({ req, res })
 });
