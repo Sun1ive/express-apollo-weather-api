@@ -4,7 +4,7 @@ import { CustomContext } from '../types/context';
 import { Context, ApolloError } from 'apollo-server-core';
 import { format } from '../helpers/formatDbResponse';
 import { generateToken } from '../services/jwt';
-import { registerValidation } from '../validation/register';
+import { registerValidation, loginValidation } from '../validation';
 
 export default {
   Query: {
@@ -57,15 +57,32 @@ export default {
       return data;
     },
 
-    login: async () => {
-      return {
-        error: null,
-        user: {
-          _id: 1,
-          email: 'foo@bar'
-        },
-        token: '1112312312'
+    login: async (
+      root: any,
+      { UserInput: { email, password } }: T.LoginMutationArgs
+    ): Promise<T.LoginResponse | ApolloError> => {
+      if (
+        !loginValidation.isValidSync({
+          email,
+          password
+        })
+      ) {
+        throw new Error('Validation error');
+      }
+
+      const user = await User.findOne({
+        email
+      });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      const data = {
+        user: format(user),
+        token: generateToken({ userId: user.id })
       };
+      return data;
     }
   }
 };

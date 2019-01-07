@@ -7,3 +7,10 @@ export const registerValidation = object().shape({
   password: string().required(),
   username: string().notRequired()
 });
+
+export const loginValidation = object().shape({
+  email: string()
+    .required()
+    .email(),
+  password: string().required()
+});
