@@ -28,6 +28,7 @@ type Error {
 type RegisterResponse {
   error: Error
   user: User!
+  token: String
 }
 
 type LoginResponse {

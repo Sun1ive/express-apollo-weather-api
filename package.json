@@ -16,7 +16,7 @@
     "postinstall": "npm run build",
     "dev": "nodemon --watch src/** -e ts,tsx --exec ts-node ./src/index.ts",
     "build": "rimraf dist && tsc && copyfiles -a ./src/schema/*.gql ./dist/schema/ -f && echo 'schema files copied.'",
-    "gen": "gql-gen",
+    "gen": "rimraf src/types/index.ts && gql-gen",
     "watch": "npm-watch"
   },
   "keywords": [],
@@ -40,7 +40,9 @@
     "mongoose": "^5.4.1",
     "morgan": "^1.9.1",
     "npm-watch": "^0.5.0",
-    "typescript": "^3.2.2"
+    "rimraf": "^2.6.3",
+    "typescript": "^3.2.2",
+    "yup": "^0.26.6"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -52,6 +54,7 @@
     "@types/mongoose": "^5.3.7",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.12.18",
+    "@types/yup": "^0.26.4",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.11.1",
     "eslint-config-airbnb-base": "^13.1.0",

@@ -27,7 +27,7 @@ export interface Query {
 }
 
 export interface User {
-  _id: string;
+  _id?: Maybe<string>;
 
   email: string;
 
@@ -62,6 +62,8 @@ export interface RegisterResponse {
   error?: Maybe<Error>;
 
   user: User;
+
+  token: string;
 }
 
 export interface Error {

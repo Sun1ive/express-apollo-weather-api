@@ -25,13 +25,4 @@ const userSchema = new Schema({
 
 userSchema.set('toObject', { virtuals: true });
 
-/**
- * This is a helper method which converts mongoose properties
- * from objects to strings, numbers, and booleans.
- */
-
-userSchema.method('toGraph', function toGraph(this: any) {
-  return JSON.parse(JSON.stringify(this));
-});
-
 export default model('User', userSchema);
