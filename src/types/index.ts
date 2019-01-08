@@ -1,11 +1,19 @@
 export type Maybe<T> = T | null;
 
-export interface UserInput {
+export interface RegisterInput {
   email: string;
 
   password: string;
 
   username: string;
+}
+
+export interface LoginInput {
+  email: string;
+
+  password: string;
+
+  username?: Maybe<string>;
 }
 
 // ====================================================
@@ -89,8 +97,8 @@ export interface CityQueryArgs {
   name: string;
 }
 export interface RegisterMutationArgs {
-  UserInput: UserInput;
+  UserInput: RegisterInput;
 }
 export interface LoginMutationArgs {
-  UserInput: UserInput;
+  UserInput: LoginInput;
 }

@@ -1,6 +1,6 @@
 type Mutation {
-  register(UserInput: UserInput!): RegisterResponse!
-  login(UserInput: UserInput!): LoginResponse!
+  register(UserInput: RegisterInput!): RegisterResponse!
+  login(UserInput: LoginInput!): LoginResponse!
 }
 
 type Query {
@@ -15,10 +15,16 @@ type User {
   username: String!
 }
 
-input UserInput {
+input LoginInput {
   email: String!
   password: String!
   username: String
+}
+
+input RegisterInput {
+  email: String!
+  password: String!
+  username: String!
 }
 
 type Error {
