@@ -14,7 +14,7 @@ export default {
       return users;
     },
 
-    getUserById: async (_: any, { id }: { id: string }) => {
+    getUserById: async (root: any, { id }: T.GetUserByIdQueryArgs) => {
       const user = await User.findById(id);
       return user;
     }
@@ -59,7 +59,7 @@ export default {
 
     login: async (
       root: any,
-      { UserInput: { email, password } }: T.LoginMutationArgs
+      { email, password }: T.LoginMutationArgs
     ): Promise<T.LoginResponse | ApolloError> => {
       if (
         !loginValidation.isValidSync({

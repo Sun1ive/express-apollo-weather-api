@@ -1,6 +1,6 @@
 type Mutation {
   register(UserInput: RegisterInput!): RegisterResponse!
-  login(UserInput: LoginInput!): LoginResponse!
+  login(email: String!, password: String!): LoginResponse!
 }
 
 type Query {

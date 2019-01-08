@@ -100,5 +100,7 @@ export interface RegisterMutationArgs {
   UserInput: RegisterInput;
 }
 export interface LoginMutationArgs {
-  UserInput: LoginInput;
+  email: string;
+
+  password: string;
 }
